@@ -12,6 +12,7 @@
 --button-color: #F5F4FA;
 --icon-fill-color: #AFB1B8;
 --list-item-gap: 30px;
+--timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 body {
     background-color: var(--secondary-color);
@@ -51,6 +52,7 @@ h1, h2, h3, h4, h5, h6, p{
     color: var(--accent-color);
     fill: var(--accent-color);
 }
+
 .img{
     display: block;
     max-width: 100%;
@@ -95,7 +97,24 @@ h1, h2, h3, h4, h5, h6, p{
     letter-spacing: 0.02em;
     padding-top: 32px;
     padding-bottom: 32px;
+    transition: color 250ms var(--timing-function);
+    
 }
+.link.current{
+    position: relative;
+}
+.link.current::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--accent-color);
+}
+
 .contacts{
     display: flex;
     margin-left: auto;
@@ -115,6 +134,8 @@ h1, h2, h3, h4, h5, h6, p{
     letter-spacing: 0.02em;
     display: flex;
     align-items: center;
+    transition: color 250ms var(--timing-function),
+    fill 250ms var(--timing-function);
 }
 
 .mail-icon{
@@ -235,6 +256,25 @@ margin-right: var(--list-item-gap);
     display: flex;
     flex-wrap: wrap;
 }
+.work-item-thumb{
+    position: relative;
+    display: flex;
+}
+.work-text-thumb{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    padding: 27px 0;
+    background-color: rgba(47, 48, 58, 0.8);
+}
+.work-item-title{
+    font-weight: 700;
+    line-height: 1.14;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
 .work-item:not(:last-child){
     width: 370px;
     margin-right: var(--list-item-gap);
@@ -305,12 +345,15 @@ margin-right: var(--list-item-gap);
     border-radius: 50%;
     padding: 12px;
     fill: var(--icon-fill-color);
+    transition: fill 250ms var(--timing-function), 
+    background-color 250ms var(--timing-function);
 }
 .socials-icon{
     width: 20px;
     height: 20px;
 }
- .socials-link:hover{
+ .socials-link:hover,
+.socials-link:focus{
      background-color: var(--accent-color);
      fill: var(--secondary-color);
 }
@@ -342,6 +385,8 @@ margin-right: var(--list-item-gap);
     border: 1px solid #AFB1B8;
     border-radius: 4px;
     fill:var(--icon-fill-color);
+    transition: fill 250ms var(--timing-function),
+    border-color 250ms var(--timing-function);
 }
 .clients-icon{
     width: 106px;
@@ -375,6 +420,9 @@ margin-right: var(--list-item-gap);
     line-height: 1.62;
     text-align: center;
     cursor: pointer;
+    transition: color 250ms var(--timing-function),
+    background-color 250ms var(--timing-function),
+    box-shadow 250ms var(--timing-function);
 }
 .filter-button:hover,
 .filter-button:focus{
@@ -403,9 +451,35 @@ margin-right: var(--list-item-gap);
     display: flex;
     flex-wrap: wrap;
 }
+.project-img-thumb{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+.project-descr-thumb{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    padding: 63px 24px;
+    background-color: rgba(33, 150, 243, 0.9);
+    transform: translatey(0);
+    transition: transform 250ms var(--timing-function);
+}
+.project-item:hover .project-descr-thumb{
+    transform: translatey(-100%);
+}
+.project-text-descr{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.56;
+    color: var(--secondary-color);
+}
 .project-item{
     margin-right: var(--list-item-gap);
     margin-bottom: var(--list-item-gap);
+    transition: box-shadow 250ms var(--timing-function);
+
 }
 .project-item:nth-child(3n){
     margin-right: 0;
@@ -467,11 +541,13 @@ address{
 .map-link {
     color: var(--secondary-color);
     line-height: 1.71;
+    transition: color 250ms var(--timing-function);
 }
 .mail-link,
 .tel-link{
     line-height: 1.71;
     color: var(--footer-contacts-color);
+    transition: color 250ms var(--timing-function);
 }
 
 .join-box{
@@ -506,6 +582,9 @@ address{
     border-radius: 50%;
     fill: var(--secondary-color);
     background-color: rgba(255, 255, 255, 0.1);
+
+    transition: fill 250ms var(--timing-function),
+    background-color 250ms var(--timing-function);
 }
 
 .join-icon {
@@ -518,4 +597,52 @@ address{
     background-color: var(--accent-color);
     fill: var(--secondary-color);
 }
+
+/*backdrop модальне вікно*/
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 2250ms var(--timing-function);
+}
+
+.backdrop.is-hidden{
+    opacity: 0;
+    pointer-events: none;
+}
+.backdrop.is-hidden .modal{
+    transform: translate(-50%, -50%) scale(0.8);
+}
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 528px;
+    height: 581px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 250ms var(--timing-function);
+}
+.button{
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-image: url(../images/close-btn.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 
