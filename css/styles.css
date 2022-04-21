@@ -166,7 +166,7 @@ h1, h2, h3, h4, h5, h6, p{
         rgba(47, 48, 58, 0.4)
     ), url(../images/hero-img.jpg);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size:cover;
     background-position: center;
 }
 .hero.section{
@@ -193,6 +193,13 @@ h1, h2, h3, h4, h5, h6, p{
     letter-spacing: 0.06em;
     text-decoration: none;
     cursor: pointer;
+}
+.hero-button:hover,
+.hero-button:focus{
+    background-color: #0e7cd6;
+}
+.hero-button:active{
+    box-shadow: inset 0px 0px 50px -10px #aea4cf;
 }
 
 /*особливості*/
@@ -260,16 +267,25 @@ margin-right: var(--list-item-gap);
     position: relative;
     display: flex;
 }
-.work-text-thumb{
+/*.work-text-thumb{
     position: absolute;
+    display: flex;
     bottom: 0;
     width: 100%;
     height: 70px;
     text-align: center;
-    padding: 27px 0;
     background-color: rgba(47, 48, 58, 0.8);
-}
+}*/
 .work-item-title{
+    position: absolute;
+    display: flex;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    align-items:center;
+    justify-content: center;
+    background-color: rgba(47, 48, 58, 0.8);
     font-weight: 700;
     line-height: 1.14;
     text-transform: uppercase;
@@ -381,7 +397,7 @@ margin-right: var(--list-item-gap);
     display: block;
     width: 170px;
     height: 92px;
-   padding: 16px 32px;
+     padding: 16px 32px;
     border: 1px solid #AFB1B8;
     border-radius: 4px;
     fill:var(--icon-fill-color);
@@ -608,7 +624,7 @@ address{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.1);
     opacity: 1;
-    transition: opacity 2250ms var(--timing-function);
+    transition: opacity 250ms var(--timing-function);
 }
 
 .backdrop.is-hidden{
@@ -623,8 +639,13 @@ address{
     top: 50%;
     left: 50%;
     width: 528px;
+    max-width: 100%;
     height: 581px;
+    max-height: 100%;
     background-color: #ffffff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     transform: translate(-50%, -50%) scale(1);
     transition: transform 250ms var(--timing-function);
@@ -643,6 +664,13 @@ address{
     background-image: url(../images/close-btn.svg);
     background-repeat: no-repeat;
     background-position: center;
+}
+.button:hover,
+.button:focus{
+    background-color:#ECECEC;
+}
+.button:active{
+    background-color: #C4C4C4;
 }
 
 
